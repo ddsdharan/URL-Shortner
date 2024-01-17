@@ -103,9 +103,26 @@ router.put("/activation/:id", async (request, response) => {
         }
     } catch (error) {
         console.error(error);
-        response.status(500).json({ message: "Internal Server Error" });
+        response.status(500).json({ message: "Internal Server Error", error: error.message, stack: error.stack });
     }
 });
+
+
+// router.put("/activation/:id", async (request, response) => {
+//     try {
+//         const { id } = request.params;
+//         const user = await updateactivationById(id);
+
+//         if (user) {
+//             response.json({ message: "Your account activated" });
+//         } else {
+//             response.status(404).json({ message: "User not found" });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         response.status(500).json({ message: "Internal Server Error" });
+//     }
+// });
 
 router.post("/login", async function (request, response) {
     const { email, password } = request.body;
