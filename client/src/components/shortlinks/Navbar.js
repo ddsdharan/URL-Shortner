@@ -23,15 +23,15 @@ function Navbar() {
 
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top ml-2 mr-2" style={{ backgroundColor: "#e3f2fd !important" }} >
             <div className='col-lg-8 ml-2'>
-                <button to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" ><b>URL Shortner</b></button>
-                <Link to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" >URL Shortening</Link>
-                <Link to={"/portal/listurl"} className="btn navbar-brand col px-md-4" >URLs List</Link>
+                <button to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" ><b>URL SHORTNER APPLICATION</b></button>
+                <Link to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" >URL Shortner</Link>
+                <Link to={"/portal/listurl"} className="btn navbar-brand col px-md-4" >URL List</Link>
             </div>
 
             <div className='col-lg-4 '>
                 <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <button className="btn btn-outline-danger m-2" onClick={() => { doLogout() }}>  Logout </button>
+                        <button className="btn btn-outline-danger m-2" onClick={() => { doLogout() }}>  SIGN OUT </button>
                     </div>
                 </div>
             </div>
