@@ -1,0 +1,20 @@
+.form {
+  padding: 10px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+}
+
+.signup-form {
+  gap: 12px;
+}
+
+.login-form {
+  gap: 16px;
+
+}
+
+.forgot-form {
+  gap: 12px;
+}
