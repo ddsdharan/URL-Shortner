@@ -12,7 +12,7 @@ export async function getUserByUsername(email) {
 }
 
 export async function updateactivationById(id) {
-    return await client.db("URL_Shortner").collection("users").updateOne({ _id: ObjectId(id) }, { $set: { activation: true } });
+    return await client.db("URL_Shortner").collection("users").updateOne({ _id: new ObjectId(id) }, { $set: { activation: true } });
 }
 
 
