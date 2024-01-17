@@ -3,5 +3,5 @@ export const config = {
     client: "https://url-shortner-sandy-seven.vercel.app/"
 }
 
-//for backend local    http://localhost:4000
-//for frontend local    http://localhost:3000
+//client= http://localhost:3000
+//api= http://localhost:8000
