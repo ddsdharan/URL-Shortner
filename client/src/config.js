@@ -1,6 +1,6 @@
 export const config = {
-    api: "http://localhost:8000",
-    client: "http://localhost:3000"
+  api: "https://url-shortner-server-df49.onrender.com",
+    client: "https://url-shortner-sandy-seven.vercel.app/"
 }
 
 //for backend local    http://localhost:4000
