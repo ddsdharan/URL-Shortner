@@ -23,7 +23,7 @@ function Navbar() {
 
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top ml-2 mr-2" style={{ backgroundColor: "#e3f2fd !important" }} >
             <div className='col-lg-8 ml-2'>
-                <button to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" ><b>URL Shortening APP</b></button>
+                <button to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" ><b>URL Shortner</b></button>
                 <Link to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" >URL Shortening</Link>
                 <Link to={"/portal/listurl"} className="btn navbar-brand col px-md-4" >URLs List</Link>
             </div>
