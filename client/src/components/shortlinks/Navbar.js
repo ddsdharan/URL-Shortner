@@ -26,7 +26,7 @@ function Navbar() {
                 <button to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" ><b>URL SHORTNER APPLICATION</b></button>
                 <Link to={"/portal/shortlink"} className="btn navbar-brand col px-md-4" >URL Shortner</Link>
                 <Link to={"/portal/listurl"} className="btn navbar-brand col px-md-4" >URL List</Link>
-                    <span className='owner'>Owned by: Sri Sujith</span>
+                    <span className='owner'><p>Owned by: Sri Sujith</p></span>
             </div>
 
             <div className='col-lg-4 '>
