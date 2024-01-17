@@ -81,13 +81,29 @@ router.post("/register", async function (request, response) {
 });
 
 //account activation
+// router.put("/activation/:id", async (request, response) => {
+//     try {
+//         const { id } = request.params;
+//         const user = await updateactivationById(id);
+//         response.json({ message: "Your account activated" });
+//     } catch (error) {
+//         response.status(400).json({ message: "Something went wrong" });
+//     }
+// });
+
 router.put("/activation/:id", async (request, response) => {
     try {
         const { id } = request.params;
         const user = await updateactivationById(id);
-        response.json({ message: "Your account activated" });
+
+        if (user) {
+            response.json({ message: "Your account activated" });
+        } else {
+            response.status(404).json({ message: "User not found" });
+        }
     } catch (error) {
-        response.status(400).json({ message: "Something went wrong" });
+        console.error(error);
+        response.status(500).json({ message: "Internal Server Error" });
     }
 });
 
