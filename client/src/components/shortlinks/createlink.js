@@ -68,6 +68,7 @@ onSubmit: async (values, { setSubmitting }) => {
         setSubmitting(false); // Ensure that the form is not in a submitting state, regardless of success or failure
     }
 },
+    });
 
     return (
         <>
