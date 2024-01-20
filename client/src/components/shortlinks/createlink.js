@@ -32,8 +32,8 @@ function CreateLink() {
         });
         toast.success(shortLink.data.message);
         userContextData.setshorturl(shortLink.data.shorturl);
-        resetForm();
-      } catch (error) {
+        console.log(shortLink.data.shorturl)
+        } catch (error) {
         toast.error(error.response.data.message);
         userContextData.setshorturl(error.response.data.shorturl);
         resetForm();
