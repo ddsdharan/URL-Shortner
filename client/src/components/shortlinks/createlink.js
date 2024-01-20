@@ -38,10 +38,11 @@ function CreateLink() {
         console.error("Unexpected response format. Please check the console for details.");
         toast.error("Unexpected response format.");
     }
-} catch (error) {
+} } catch (error) {
     console.error("Error during form submission:", error);
 
     if (error.response && error.response.data) {
+        console.error("Server response:", error.response.data);
         toast.error(error.response.data.message);
         userContextData.setshorturl(error.response.data.shorturl);
     } else {
@@ -51,7 +52,7 @@ function CreateLink() {
 } finally {
     setSubmitting(false);
 }
-        },
+},
     });
 
     return (
