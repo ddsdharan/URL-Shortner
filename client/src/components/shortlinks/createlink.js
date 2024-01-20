@@ -32,7 +32,7 @@ function CreateLink() {
         });
         toast.success(shortLink.data.message);
         userContextData.setshorturl(shortLink.data.shorturl);
-        console.log(shortLink.data.response)
+        console.log(shortLink.data)
         } catch (error) {
         toast.error(error.response.data.message);
         userContextData.setshorturl(error.response.data.shorturl);
