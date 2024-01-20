@@ -15,11 +15,11 @@ router.post("/createlink", auth, async function (request, response) {
             .send({ message: "this URL already exist", shorturl: url.shorturl });
     } else {
         const uid = new ShortUniqueId({ length: 5 });
-        console.log("received token is", request.headers.logintoken);
+        // console.log("received token is", request.headers.logintoken);
         const shorturl = uid;
         console.log("short url is", shorturl);
         const user = await getUserByUsername(email);
-        console.log("user obj is", user);
+        // console.log("user obj is", user);
         // console.log("user id is", user_id);
         await storeurl({
             shorturl: shorturl,
@@ -35,17 +35,16 @@ router.post("/createlink", auth, async function (request, response) {
 
 router.get("/getlongurl/:userid", auth, async function (request, response) {
     const { userid } = request.params;
-
     await updatecount(userid);
     const url = await getlongurl(userid);
-    console.log("url obj is", url);
+    // console.log("url obj is", url);
     if (url) {
-
         response.send({ message: "url found", longurl: url.longurl });
     } else {
         response.status(400).send({ message: "url not found" });
     }
 });
+
 router.get("/geturls/:userid", auth, async function (request, response) {
     const { userid } = request.params;
     const urls = await geturls(userid);
