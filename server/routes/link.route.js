@@ -5,7 +5,7 @@ import { findlongurl, storeurl, getlongurl, updatecount, geturls } from "../serv
 import { getUserByUsername } from "../services/users.service.js";
 import { auth } from "../middlewares/auth.js";
 
-router.post("/createlink", auth, async function (request, response) {
+router.post("/link/createlink", auth, async function (request, response) {
     const { longurl, email } = request.body;
     const url = await findlongurl(longurl);
     if (url) {
