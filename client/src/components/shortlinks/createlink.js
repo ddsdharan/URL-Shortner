@@ -14,46 +14,46 @@ function CreateLink() {
     let mail = localStorage.getItem('email');
     
     const { values, touched, errors, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
-        initialValues: {
-            email: `${mail}`,
-            longurl: ""
-        },
-        validationSchema: yup.object({
-            email: yup.string().required().email(),
-            longurl: yup.string().required().min(4)
-        }),
-        onSubmit: async (values, { setSubmitting }) => {
-            try {
-    const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
-        headers: {
-            'Authorization': `${localStorage.getItem('token')}`
-        }
-    });
-    
-    if (shortLink && shortLink.data) {
-        toast.success(shortLink.data.message);
-        userContextData.setshorturl(shortLink.data.shorturl);
-        resetForm();
-    } else {
-        console.error("Unexpected response format. Please check the console for details.");
-        toast.error("Unexpected response format.");
-    }
-} } catch (error) {
-    console.error("Error during form submission:", error);
+    initialValues: {
+        email: `${mail}`,
+        longurl: ""
+    },
+    validationSchema: yup.object({
+        email: yup.string().required().email(),
+        longurl: yup.string().required().min(4)
+    }),
+    onSubmit: async (values, { setSubmitting }) => {
+        try {
+            const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
-    if (error.response && error.response.data) {
-        console.error("Server response:", error.response.data);
-        toast.error(error.response.data.message);
-        userContextData.setshorturl(error.response.data.shorturl);
-    } else {
-        console.error("Unexpected error:", error);
-        toast.error("An unexpected error occurred. Please check the console for details.");
-    }
-} finally {
-    setSubmitting(false);
-}
-},
-    });
+            if (shortLink && shortLink.data) {
+                toast.success(shortLink.data.message);
+                userContextData.setshorturl(shortLink.data.shorturl);
+                resetForm();
+            } else {
+                console.error("Unexpected response format. Please check the console for details.");
+                toast.error("Unexpected response format.");
+            }
+        } catch (error) {
+            console.error("Error during form submission:", error);
+
+            if (error.response && error.response.data) {
+                console.error("Server response:", error.response.data);
+                toast.error(error.response.data.message);
+                userContextData.setshorturl(error.response.data.shorturl);
+            } else {
+                console.error("Unexpected error:", error);
+                toast.error("An unexpected error occurred. Please check the console for details.");
+            }
+        } finally {
+            setSubmitting(false);
+        }
+    },
+});
 
     return (
         <>
