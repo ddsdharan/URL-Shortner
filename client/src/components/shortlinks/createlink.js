@@ -160,13 +160,14 @@ const CreateLink = () => {
   const handleSubmit = async (values) => {
     try {
       setIsSubmitting(true);
-      const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
+      const response = await axios.post(`${config.api}/link/createlink`, values, {
         headers: {
           'Authorization': `${localStorage.getItem('token')}`
         }
       });
-      toast.success(shortLink.data.message);
-      userContextData.setshorturl(shortLink.data.shorturl);
+      const shortLink = response.data.shorturl;
+      toast.success(response.data.message);
+      userContextData.setshorturl(shortLink);
     } catch (error) {
       toast.error(error.response?.data?.message || 'An unexpected error occurred');
       userContextData.setshorturl(error.response?.data?.shorturl || '');
