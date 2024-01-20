@@ -24,21 +24,23 @@ function CreateLink() {
         }),
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
-                    headers: {
-                        'Authorization': `${localStorage.getItem('token')}`
-                    }
-                });
-                if (shortLink && shortLink.data) {
-                    toast.success(shortLink.data.message);
-                    userContextData.setshorturl(shortLink.data.shorturl);
-                    resetForm();
-                } else {
-                    console.error("Unexpected response format:", shortLink);
-                    toast.error("Unexpected response format. Please check the console for details.");
-                }
-            } catch (error) {
+    const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
+        headers: {
+            'Authorization': `${localStorage.getItem('token')}`
+        }
+    });
+    
+    if (shortLink && shortLink.data) {
+        toast.success(shortLink.data.message);
+        userContextData.setshorturl(shortLink.data.shorturl);
+        resetForm();
+    } else {
+        console.error("Unexpected response format. Please check the console for details.");
+        toast.error("Unexpected response format.");
+    }
+} catch (error) {
     console.error("Error during form submission:", error);
+
     if (error.response && error.response.data) {
         toast.error(error.response.data.message);
         userContextData.setshorturl(error.response.data.shorturl);
@@ -49,7 +51,6 @@ function CreateLink() {
 } finally {
     setSubmitting(false);
 }
-
         },
     });
 
