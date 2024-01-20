@@ -17,7 +17,7 @@ router.post("/createlink", auth, async function (request, response) {
         const uid = new ShortUniqueId({ length: 5 });
         console.log("received token is", request.headers.logintoken);
         const shorturl = uid;
-        console.log("short url is", shortStr);
+        console.log("short url is", shorturl);
         const user = await getUserByUsername(email);
         console.log("user obj is", user);
         console.log("user id is", user_id);
