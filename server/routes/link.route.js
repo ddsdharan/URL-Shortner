@@ -20,7 +20,7 @@ router.post("/createlink", auth, async function (request, response) {
         console.log("short url is", shorturl);
         const user = await getUserByUsername(email);
         console.log("user obj is", user);
-        console.log("user id is", user_id);
+        // console.log("user id is", user_id);
         await storeurl({
             shorturl: shorturl,
             longurl: longurl,
@@ -38,7 +38,7 @@ router.get("/getlongurl/:userid", auth, async function (request, response) {
 
     await updatecount(userid);
     const url = await getlongurl(userid);
-    // console.log("url obj is", urlObj);
+    console.log("url obj is", url);
     if (url) {
 
         response.send({ message: "url found", longurl: url.longurl });
@@ -50,7 +50,6 @@ router.get("/geturls/:userid", auth, async function (request, response) {
     const { userid } = request.params;
     const urls = await geturls(userid);
     if (urls) {
-
         response.send({ message: "list urls found", newData: urls });
     } else {
         response.status(400).send({ message: "url not found" });
