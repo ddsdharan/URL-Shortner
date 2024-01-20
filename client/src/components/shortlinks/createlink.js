@@ -9,65 +9,47 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-// function CreateLink() {
-//     const userContextData = useContext(UserContext);
-//     let mail = localStorage.getItem('email');
-//     const { values, touched, errors, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
-//         initialValues: {
-//             "email": `${mail}`,
-//             "longurl": ""
-//         },
-//         validationSchema: yup.object({
-//             email: yup.string().required().email(),
-//             longurl: yup.string().required().min(4)
-//         }),
-//         onSubmit: async (values) => {
-//             try {
-//                 const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
-//                     headers: {
-//                         'Authorization': `${localStorage.getItem('token')}`
-//                     }
-//                 });
-//                 toast.success(shortLink.data.message);
-//                 userContextData.setshorturl(shortLink.data.shorturl);
-//                 resetForm();
-
-//             } catch (error) {
-//                 toast.error(error.response.data.message);
-//                 userContextData.setshorturl(error.response.data.shorturl);
-//                 resetForm();
-//             }
-//         },
-//     });
-
-onSubmit: async (values, { setSubmitting }) => {
-    try {
-        const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
-            headers: {
-                'Authorization': `${localStorage.getItem('token')}`
+function CreateLink() {
+    const userContextData = useContext(UserContext);
+    let mail = localStorage.getItem('email');
+    
+    const { values, touched, errors, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
+        initialValues: {
+            email: `${mail}`,
+            longurl: ""
+        },
+        validationSchema: yup.object({
+            email: yup.string().required().email(),
+            longurl: yup.string().required().min(4)
+        }),
+        onSubmit: async (values, { setSubmitting }) => {
+            try {
+                const shortLink = await axios.post(`${config.api}/link/createlink`, values, {
+                    headers: {
+                        'Authorization': `${localStorage.getItem('token')}`
+                    }
+                });
+                if (shortLink && shortLink.data) {
+                    toast.success(shortLink.data.message);
+                    userContextData.setshorturl(shortLink.data.shorturl);
+                    resetForm();
+                } else {
+                    console.error("Unexpected response format:", shortLink);
+                    toast.error("Unexpected response format. Please check the console for details.");
+                }
+            } catch (error) {
+                console.error("Error during form submission:", error);
+                if (error.response && error.response.data) {
+                    toast.error(error.response.data.message);
+                    userContextData.setshorturl(error.response.data.shorturl);
+                } else {
+                    console.error("Unexpected error format:", error);
+                    toast.error("An unexpected error occurred. Please check the console for details.");
+                }
+            } finally {
+                setSubmitting(false);
             }
-        });
-        if (shortLink && shortLink.data) {
-            toast.success(shortLink.data.message);
-            userContextData.setshorturl(shortLink.data.shorturl);
-            resetForm();
-        } else {
-            console.error("Unexpected response format:", shortLink);
-            toast.error("Unexpected response format. Please check the console for details.");
-        }
-    } catch (error) {
-        console.error("Error during form submission:", error);
-        if (error.response && error.response.data) {
-            toast.error(error.response.data.message);
-            userContextData.setshorturl(error.response.data.shorturl);
-        } else {
-            console.error("Unexpected error format:", error);
-            toast.error("An unexpected error occurred. Please check the console for details.");
-        }
-    } finally {
-        setSubmitting(false); // Ensure that the form is not in a submitting state, regardless of success or failure
-    }
-},
+        },
     });
 
     return (
@@ -91,19 +73,24 @@ onSubmit: async (values, { setSubmitting }) => {
                 </Button>
             </form>
             <div className="forgot-form form">
-                {userContextData.shorturl.length > 0 ? <> <h3>SHORTEN URL</h3>
+                {userContextData.shorturl.length > 0 ? <>
+                    <h3>SHORTEN URL</h3>
                     <TextField
                         type={"text"}
                         label="shorturl"
                         className="form-control form-control-user mb-2"
                         name={'shorturl'}
                         value={`${config.client}/${userContextData.shorturl}`}
-
-                    /><CopyToClipboard text={`${config.client}/${userContextData.shorturl}`}><Button type="submit" variant="contained">
-                        copy
-                    </Button></CopyToClipboard></> : null}
+                    />
+                    <CopyToClipboard text={`${config.client}/${userContextData.shorturl}`}>
+                        <Button type="submit" variant="contained">
+                            Copy
+                        </Button>
+                    </CopyToClipboard>
+                </> : null}
             </div>
         </>
     );
 }
+
 export default CreateLink;
