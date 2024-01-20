@@ -15,7 +15,6 @@ router.post("/createlink", auth, async function (request, response) {
     } else {
         const uid = new ShortUniqueId({ length: 5 });
         const shorturl = uid;
-        console.log("short url is", shorturl);
         const user = await getUserByUsername(email);
         await storeurl({
             shorturl: shorturl,
