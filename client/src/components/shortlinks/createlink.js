@@ -38,17 +38,18 @@ function CreateLink() {
                     toast.error("Unexpected response format. Please check the console for details.");
                 }
             } catch (error) {
-                console.error("Error during form submission:", error);
-                if (error.response && error.response.data) {
-                    toast.error(error.response.data.message);
-                    userContextData.setshorturl(error.response.data.shorturl);
-                } else {
-                    console.error("Unexpected error format:", error);
-                    toast.error("An unexpected error occurred. Please check the console for details.");
-                }
-            } finally {
-                setSubmitting(false);
-            }
+    console.error("Error during form submission:", error);
+    if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+        userContextData.setshorturl(error.response.data.shorturl);
+    } else {
+        console.error("Unexpected error:", error);
+        toast.error("An unexpected error occurred. Please check the console for details.");
+    }
+} finally {
+    setSubmitting(false);
+}
+
         },
     });
 
