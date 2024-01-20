@@ -80,17 +80,6 @@ router.post("/register", async function (request, response) {
     }
 });
 
-//account activation
-// router.put("/activation/:id", async (request, response) => {
-//     try {
-//         const { id } = request.params;
-//         const user = await updateactivationById(id);
-//         response.json({ message: "Your account activated" });
-//     } catch (error) {
-//         response.status(400).json({ message: "Something went wrong" });
-//     }
-// });
-
 router.put("/activation/:id", async (request, response) => {
     try {
         const { id } = request.params;
@@ -106,23 +95,6 @@ router.put("/activation/:id", async (request, response) => {
         response.status(500).json({ message: "Internal Server Error", error: error.message, stack: error.stack });
     }
 });
-
-
-// router.put("/activation/:id", async (request, response) => {
-//     try {
-//         const { id } = request.params;
-//         const user = await updateactivationById(id);
-
-//         if (user) {
-//             response.json({ message: "Your account activated" });
-//         } else {
-//             response.status(404).json({ message: "User not found" });
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         response.status(500).json({ message: "Internal Server Error" });
-//     }
-// });
 
 router.post("/login", async function (request, response) {
     const { email, password } = request.body;
@@ -156,9 +128,8 @@ router.post('/sendmail', async function (request, response) {
             console.log("body", request.body.email);
             await updateUser({ email: request.body.email, randomnum: randomnum });
             var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                host: "smtp.gmail.com",
-                secure: false,
+                host: "smtp.ethereal.email",
+                port: 587,
                 auth: {
                     user: process.env.EMAIL,
                     pass: process.env.PASSWORD,
