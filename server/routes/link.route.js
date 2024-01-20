@@ -7,7 +7,6 @@ import { auth } from "../middlewares/auth.js";
 
 router.post("/createlink", auth, async function (request, response) {
     const { longurl, email } = request.body;
-    // console.log("url is", lUrl); //if url already there in short give the existing
     const url = await findlongurl(longurl);
     if (url) {
         response
@@ -19,8 +18,6 @@ router.post("/createlink", auth, async function (request, response) {
         const shorturl = uid;
         console.log("short url is", shorturl);
         const user = await getUserByUsername(email);
-        // console.log("user obj is", user);
-        // console.log("user id is", user_id);
         await storeurl({
             shorturl: shorturl,
             longurl: longurl,
@@ -37,7 +34,6 @@ router.get("/getlongurl/:userid", auth, async function (request, response) {
     const { userid } = request.params;
     await updatecount(userid);
     const url = await getlongurl(userid);
-    // console.log("url obj is", url);
     if (url) {
         response.send({ message: "url found", longurl: url.longurl });
     } else {
