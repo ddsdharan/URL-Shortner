@@ -14,7 +14,7 @@ router.post("/createlink", auth, async function (request, response) {
             .send({ message: "this URL already exist", shorturl: url.shorturl });
     } else {
         const uid = new ShortUniqueId({ length: 5 });
-        const shorturl = uid;
+        const shorturl = uid.rnd();
         const user = await getUserByUsername(email);
         await storeurl({
             shorturl: shorturl,
