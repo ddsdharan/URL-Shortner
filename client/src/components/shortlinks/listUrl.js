@@ -15,8 +15,6 @@ function ListUrl() {
         "shorturl",
         "clicked count"
     ];
-
-    // Define getList using useCallback
     const getList = useCallback(async () => {
         try {
             const url = await axios.get(`${config.api}/link/geturls/${mail}`, {
@@ -44,7 +42,6 @@ function ListUrl() {
     }, [mail]);
 
     useEffect(() => {
-        // Now you can use getList directly in the dependency array
         getList();
     }, [getList]);
 
